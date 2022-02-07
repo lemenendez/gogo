@@ -1,0 +1,5 @@
+- improve diagram
+- remove ftable and fkey from field
+- add props to fields
+- create go generator as example
+- create ts generator as example

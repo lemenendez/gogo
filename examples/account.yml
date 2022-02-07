@@ -1,0 +1,21 @@
+name: account
+comment: Principal account table
+props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: accounting}
+fields:
+    - name: id
+      type: int
+      pk: true
+      unsigned: true
+    - name: uid
+      type: uuid
+      required: true
+    - name: name
+      type: string
+      size: 128
+      required: true
+    - name: updated_at
+      type: date_time
+      required: true
+    - name: created_at
+      type: date_time
+      required: true

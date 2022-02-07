@@ -1,0 +1,10 @@
+name: gogo default config file
+generators:
+  mysql:
+    description: MySQL DDL Generator
+    template-path: examples/mysql
+    map: {big_int: bigint, date: date, date_time: datetime, int: int, medium_text: mediumtext, small_int: smallint, string: varchar, uuid: binary(16)}
+  go:
+    description: GO Entity struct
+    template-path: examples/gorm
+    map: {big_int: bigint, date: time.Time, date_time: datetime, int: int32, medium_text: string, small_int: smallint, string: string, uuid: gtypes.UID}
