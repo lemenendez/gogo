@@ -1,22 +1,37 @@
 package pkg
 
-import (
-	input "github.com/lemenendez/gogo/pkg/in"
-)
-
 type Entity struct {
-	input.Entity
-	Fields []Field
-	PK     *Field
+	Name    string   `yaml:"name"`
+	Comment string   `yaml:"comment"`
+	Fields  []Field  `yaml:"fields,flow"`
+	Props   FieldMap `yaml:"props"`
+	PK      *Field
 }
 
-// Map maps fields from a FieldMap
-func (e *Entity) Map(fm input.FieldMap) {
+type Field struct {
+	Name     string `yaml:"name"`
+	Type     string `yaml:"type"`
+	Unsigned bool   `yaml:"unsigned"`
+	Required bool   `yaml:"required"`
+	PK       bool   `yaml:"pk"`
+	// Foreign Key table name
+	FTable string `yaml:"ftable"`
+	FKey   string `yaml:"fkey"`
+	// Is unique?
+	Unique bool `yaml:"unique"`
+	// Size of string field
+	Size       uint32 `yaml:"size"`
+	Comment    string `yaml:"comment"`
+	MappedType string
+	IsLast     bool
+}
+
+// Map maps fields-types from a FieldMap
+func (e *Entity) Map(fm FieldMap) {
 	for idx, f := range e.Fields {
 		e.Fields[idx].MappedType = fm[f.Type]
-	}
-	// TODO: why do I need to do this?
-	if e.PK != nil {
-		e.PK.MappedType = fm[e.PK.Type]
+		if f.PK {
+			e.PK = &e.Fields[idx]
+		}
 	}
 }

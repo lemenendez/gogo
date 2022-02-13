@@ -6,5 +6,5 @@ generators:
     map: {big_int: bigint, date: date, date_time: datetime, int: int, medium_text: mediumtext, small_int: smallint, string: varchar, uuid: binary(16)}
   go:
     description: GO Entity struct
-    template-path: examples/gorm
+    template-path: examples/go
     map: {big_int: bigint, date: time.Time, date_time: datetime, int: int32, medium_text: string, small_int: smallint, string: string, uuid: gtypes.UID}
