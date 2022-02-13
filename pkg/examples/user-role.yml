@@ -1,0 +1,26 @@
+name: user_role
+comment: many-to-many relation between user and role
+props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: security, goimports: time}
+fields:
+    - name: id
+      type: big_int
+      pk: true
+      unsigned: true
+      comment: pk
+    - name: user_id
+      type: int
+      required: true
+      ftable: user
+      fkey: id
+      comment: ref to user
+    - name: role_id
+      type: int
+      required: true
+      ftable: role
+      fkey: id
+      unique: true
+      comment: ref to role 
+    - name: created_at
+      type: date_time
+      required: true
+      comment: created datetime

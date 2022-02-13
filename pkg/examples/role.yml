@@ -1,21 +1,21 @@
-name: account
-comment: Principal account table
-props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: accounting, goimports: time}
+name: role
+comment: defines a group of permissions
+props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: security, goimports: time}
 fields:
     - name: id
       type: int
       pk: true
       unsigned: true
       comment: pk
-    - name: uid
-      type: uuid
-      required: true
-      comment: unique id
     - name: name
       type: string
       size: 128
       required: true
-      comment: account name
+      unique: true
+      comment: unique name
+    - name: description
+      type: medium_text
+      required: true
     - name: updated_at
       type: date_time
       required: true

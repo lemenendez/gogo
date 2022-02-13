@@ -4,8 +4,8 @@
 {{ template "create_table" . }}
 {{ template "primary-key" . }}
 {{ template "primary-key-auto" . }}
-{{- template "fks" .}}
-{{- template "fks-idx" .}}
-{{- template "unique" .}}
+{{ template "fks" .}}
+{{ template "fks-idx" .}}
+{{ template "unique" .}}
 /************************ MySQL migration ***********************/
 {{- end -}}

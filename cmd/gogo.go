@@ -3,10 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"os"
 	"path/filepath"
 	"text/template"
+
+	"gopkg.in/yaml.v2"
 
 	"github.com/lemenendez/gogo/pkg"
 
@@ -62,7 +63,13 @@ var rootCmd = &cobra.Command{
 			}
 			gen.Tpl = tpl
 			ent.Map(gen.FieldMap)
-			fmt.Println(gen.Exec(ent, args[2]))
+			if res, err := gen.Exec(ent, args[2]); err != nil {
+				fmt.Println(err)
+				panic(err)
+			} else {
+				fmt.Print(res)
+			}
+			// fmt.Println(gen.Exec(ent, args[2]))
 		} else {
 			fmt.Println("generator not found")
 			os.Exit(1)
@@ -71,7 +78,7 @@ var rootCmd = &cobra.Command{
 }
 
 func Setup() {
-	rootCmd.PersistentFlags().StringVarP(&cfgFileName, "config", "c", "", fmt.Sprintf("config file name (default is $HOME/%v.yml)", defCfgFileName))
+	rootCmd.PersistentFlags().StringVarP(&cfgFileName, "config", "c", "", fmt.Sprintf("config file name (default is PWD/%v.yml)", defCfgFileName))
 	cobra.OnInitialize(initConfig)
 }
 

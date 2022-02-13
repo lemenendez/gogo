@@ -14,8 +14,17 @@ var templateFS embed.FS
 //go:embed examples/account.yml
 var accYml []byte
 
+//go:embed examples/user.yml
+var usrYML []byte
+
+//go:embed examples/role.yml
+var roleYML []byte
+
 //go:embed examples/config.yml
 var configYml []byte
+
+//go:embed examples/user-role.yml
+var usrRoleYml []byte
 
 func TestMany(t *testing.T) {
 	cases := []struct {
@@ -39,6 +48,21 @@ func TestMany(t *testing.T) {
 			generator: "go",
 			template:  "struct",
 		},
+		{
+			entitySrc: usrYML,
+			generator: "mysql",
+			template:  "migration",
+		},
+		{
+			entitySrc: roleYML,
+			generator: "mysql",
+			template:  "migration",
+		},
+		{
+			entitySrc: usrRoleYml,
+			generator: "mysql",
+			template:  "migration",
+		},
 	}
 
 	cfg := pkg.Config{}
@@ -47,7 +71,7 @@ func TestMany(t *testing.T) {
 	}
 	for _, test := range cases {
 		test.entity = &pkg.Entity{}
-		if err := test.entity.UnmarshalYAML(accYml); err != nil {
+		if err := test.entity.UnmarshalYAML(test.entitySrc); err != nil {
 			t.Fatal(err)
 		}
 		if gen, ok := cfg.Gens[test.generator]; ok {

@@ -1,21 +1,18 @@
-name: account
-comment: Principal account table
-props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: accounting, goimports: time}
+name: user
+comment: user entity
+props: {charset: utf8mb4, collate: utf8mb4_unicode_ci, package: security, goimports: time}
 fields:
     - name: id
       type: int
       pk: true
       unsigned: true
       comment: pk
-    - name: uid
-      type: uuid
-      required: true
-      comment: unique id
-    - name: name
+    - name: email
       type: string
       size: 128
       required: true
-      comment: account name
+      unique: true
+      comment: unique email
     - name: updated_at
       type: date_time
       required: true
