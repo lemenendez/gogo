@@ -16,6 +16,7 @@ import (
 
 var (
 	cfgFileName string
+	cfgDirName  string
 	cfg         *pkg.Config
 )
 
@@ -29,13 +30,14 @@ func initConfig() {
 		if err != nil {
 			panic(err)
 		}
-		realCfgFileName = fmt.Sprintf("%v/%v.%v", wd, defCfgFileName, "yaml")
+		realCfgFileName = fmt.Sprintf("%v/%v.%v", wd, defCfgFileName, "yml")
 		err = saveDefaultConfig(realCfgFileName)
 		if err != nil {
 			panic(err)
 		}
 	}
 	var err error
+	cfgDirName = filepath.Dir(realCfgFileName)
 	cfg, err = newConfigFromFile(realCfgFileName)
 	if err != nil {
 		panic(err)
@@ -51,11 +53,10 @@ var rootCmd = &cobra.Command{
 		ent, err := newEntityFromFile(args[0])
 		if err != nil {
 			panic(err)
+			// fmt.Println(dirPath)
 		}
-		dirPath := filepath.Dir(args[0])
-		// fmt.Println(dirPath)
 		if gen, found := cfg.Gens[args[1]]; found {
-			tpl, err := template.New("examples").Funcs(pkg.FuncMap).ParseGlob(fmt.Sprintf("%v/%v/*.tpl", dirPath, args[1]))
+			tpl, err := template.New("examples").Funcs(pkg.FuncMap).ParseGlob(fmt.Sprintf("%v/%v/*.tpl", cfgDirName, args[1]))
 			// tpl, err := template.New("examples").Funcs(pkg.FuncMap).ParseGlob("pkg/examples/mysql/*.tpl")
 			if err != nil {
 				fmt.Println(err)

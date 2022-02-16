@@ -18,4 +18,5 @@ ENGINE=InnoDB
 {{ template "charset" .Props }}
 {{ template "collate" .Props }}
 {{ if .Comment}}COMMENT '{{.Comment}}'{{end}};
+/******************************* {{ c1gi }} ******************************/
 /****************************************************************/{{ end }}
