@@ -27,3 +27,19 @@ func TestPadding(t *testing.T) {
 		}
 	}
 }
+
+func TestCounters(t *testing.T) {
+	cases := []struct {
+		expected int
+	}{
+		{expected: 0},
+		{expected: 1},
+		{expected: 2},
+		{expected: 3},
+	}
+	for _, tcase := range cases {
+		if tcase.expected != c1gi() {
+			t.Fail()
+		}
+	}
+}

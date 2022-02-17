@@ -25,8 +25,9 @@ func leftPad(number int, padding int) string {
 /// c1gin counter 1 get and increase
 func c1gi() int {
 	//s := fmt.Sprintf("%v", c1)
+	c1_copy := c1
 	c1++
-	return c1
+	return c1_copy
 }
 
 /// c1g counter 1 get
