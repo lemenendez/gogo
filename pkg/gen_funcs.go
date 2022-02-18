@@ -71,6 +71,7 @@ var FuncMap template.FuncMap = template.FuncMap{
 	"c1gi":            c1gi,
 	"c1g":             c1g,
 	"leftPad":         leftPad,
+	"replaceAll":      strings.ReplaceAll,
 }
 
 /*

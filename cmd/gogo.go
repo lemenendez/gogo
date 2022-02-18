@@ -63,10 +63,13 @@ var rootCmd = &cobra.Command{
 				panic(err)
 			}
 			gen.Tpl = tpl
-			ent.Map(gen.FieldMap)
+			if err := ent.Map(gen.FieldMap); err != nil {
+				fmt.Println(err)
+				// panic(err)
+			}
 			if res, err := gen.Exec(ent, args[2]); err != nil {
 				fmt.Println(err)
-				panic(err)
+				// panic(err)
 			} else {
 				fmt.Print(res)
 			}

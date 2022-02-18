@@ -27,11 +27,20 @@ type Field struct {
 }
 
 // Map maps fields-types from a FieldMap
-func (e *Entity) Map(fm FieldMap) {
+func (e *Entity) Map(fm FieldMap) error {
 	for idx, f := range e.Fields {
-		e.Fields[idx].MappedType = fm[f.Type]
+		if MappedType, ok := fm[f.Type]; ok {
+			e.Fields[idx].MappedType = MappedType
+		} else {
+			return ErrFieldTypeNotExists
+		}
 		if f.PK {
 			e.PK = &e.Fields[idx]
 		}
 	}
+	// update last field element
+	if len(e.Fields) > 0 {
+		e.Fields[len(e.Fields)-1].IsLast = true
+	}
+	return nil
 }

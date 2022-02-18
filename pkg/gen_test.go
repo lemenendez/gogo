@@ -80,7 +80,9 @@ func TestMany(t *testing.T) {
 				t.Fatal(err)
 			}
 			gen.Tpl = tpl
-			test.entity.Map(gen.FieldMap)
+			if err := test.entity.Map(gen.FieldMap); err != nil {
+				t.Fatal(err)
+			}
 			t.Log(gen.Exec(test.entity, test.template))
 		} else {
 			t.Fatal("invalid generator name in test case")
