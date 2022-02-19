@@ -10,14 +10,12 @@ fields:
     - name: user_id
       type: int
       required: true
-      ftable: user
-      fkey: id
+      props: {ftable: user, fkey: id }
       comment: ref to user
     - name: role_id
       type: int
       required: true
-      ftable: role
-      fkey: id
+      props: { ftable: role, fkey: id }
       unique: true
       comment: ref to role 
     - name: created_at

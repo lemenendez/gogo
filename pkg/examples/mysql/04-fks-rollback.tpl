@@ -1,7 +1,7 @@
 {{ define "fks-rollback" }}
 {{ $tablename := .Name }}
 {{- range $idx, $ele := .Fields }}
-{{- if gt (len $ele.FTable) 0 -}}
+{{- if and ($ele.TextProps) ( index $ele.TextProps "ftable" ) ( index $ele.TextProps "fkey" ) -}}
 /*************************** FK CONST ***************************/
 ALTER TABLE `{{$tablename}}`
     DROP FOREIGN KEY (`{{$ele.Name}}`);

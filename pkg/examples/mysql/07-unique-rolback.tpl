@@ -3,8 +3,8 @@
 {{- range $idx, $ele := .Fields }}
 {{- if $ele.Unique -}}
 /***************************** UNIQUE ***************************/
-ALTER TABLE `{{$tablename}}_{{$ele.Name}}_idx`
-    DROP INDEX `{{$tablename}}` (`{{$ele.Name}}`);
+ALTER TABLE `{{$tablename}}`
+    DROP INDEX `{{$tablename}}_{{$ele.Name}}_idx`;
 /******************************* {{ c1gi }} ******************************/
 /****************************************************************/
 {{- end -}}

@@ -63,6 +63,11 @@ func TestMany(t *testing.T) {
 			generator: "mysql",
 			template:  "migration",
 		},
+		{
+			entitySrc: usrRoleYml,
+			generator: "mysql",
+			template:  "rollback",
+		},
 	}
 
 	cfg := pkg.Config{}
@@ -72,6 +77,7 @@ func TestMany(t *testing.T) {
 	for _, test := range cases {
 		test.entity = &pkg.Entity{}
 		if err := test.entity.UnmarshalYAML(test.entitySrc); err != nil {
+			t.Logf("%s %s %s", test.generator, test.template, test.entitySrc)
 			t.Fatal(err)
 		}
 		if gen, ok := cfg.Gens[test.generator]; ok {

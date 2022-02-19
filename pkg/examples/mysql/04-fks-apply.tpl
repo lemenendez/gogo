@@ -1,12 +1,12 @@
 {{ define "fks" }}
 {{ $tablename := .Name }}
 {{- range $idx, $ele := .Fields }}
-{{- if gt (len $ele.FTable) 0 -}}
+{{- if and ($ele.TextProps) ( index $ele.TextProps "ftable" ) ( index $ele.TextProps "fkey" ) -}}
 /*************************** FK CONST ***************************/
 ALTER TABLE `{{$tablename}}`
     ADD CONSTRAINT fk_const_{{$tablename}}_{{$ele.Name}}
     FOREIGN KEY (`{{$ele.Name}}`)
-    REFERENCES `{{$ele.FTable}}` (`{{$ele.FKey}}`);
+    REFERENCES `{{$ele.TextProps.ftable }}` (`{{$ele.TextProps.fkey }}`);
 /******************************* {{ c1gi }} ******************************/
 /****************************************************************/
 {{ end }}{{- end -}}{{- end -}}

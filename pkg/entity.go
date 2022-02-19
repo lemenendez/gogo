@@ -1,22 +1,21 @@
 package pkg
 
 type Entity struct {
-	Name    string   `yaml:"name"`
-	Comment string   `yaml:"comment"`
-	Fields  []Field  `yaml:"fields,flow"`
-	Props   FieldMap `yaml:"props"`
+	Name    string    `yaml:"name"`
+	Comment string    `yaml:"comment"`
+	Fields  []Field   `yaml:"fields,flow"`
+	Props   TextProps `yaml:"props"`
 	PK      *Field
 }
 
 type Field struct {
-	Name     string `yaml:"name"`
-	Type     string `yaml:"type"`
-	Unsigned bool   `yaml:"unsigned"`
-	Required bool   `yaml:"required"`
-	PK       bool   `yaml:"pk"`
-	// Foreign Key table name
-	FTable string `yaml:"ftable"`
-	FKey   string `yaml:"fkey"`
+	Name      string    `yaml:"name"`
+	Type      string    `yaml:"type"`
+	Unsigned  bool      `yaml:"unsigned"`
+	Required  bool      `yaml:"required"`
+	PK        bool      `yaml:"pk"`
+	TextProps TextProps `yaml:"props,flow"`
+	BoolProps BoolProps `yaml:"bool_props,flow"`
 	// Is unique?
 	Unique bool `yaml:"unique"`
 	// Size of string field
