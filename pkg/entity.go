@@ -15,6 +15,7 @@ type Field struct {
 	Required  bool      `yaml:"required"`
 	PK        bool      `yaml:"pk"`
 	TextProps TextProps `yaml:"props,flow"`
+	IntProps  IntProps  `yaml:"int_props,flow"`
 	BoolProps BoolProps `yaml:"bool_props,flow"`
 	// Is unique?
 	Unique bool `yaml:"unique"`
