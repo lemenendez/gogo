@@ -8,6 +8,13 @@ A code generator in go. Input files must be written in [YAML](https://en.wikiped
 2. Entity file
 3. Templates files
 
+## Description
+The Entity file is mapped into the *Entity* and *Field* classes.
+The Configuration file is mapped into the *Config* and *Generator* classes
+Once we have both, we call the *Exec* method of the generator.
+
+![Diagram](doc/diagram.png)
+
 ## Configuration File
 
 The configuration file is a **yaml** file with the settings for the generators.
@@ -25,14 +32,14 @@ generators:
     map: {big_int: bigint, date: time.Time, date_time: datetime, int: int32, medium_text: string, small_int: smallint, string: string, uuid: string}
 ```
 
-Gogo generates code for different sets of templates name generators.
+Gogo can generate code for many use cases. The code generation is made with the tpl files.
 
 A generator consists of:
 
 - A list of templates (*.tpl*)]
 - A field map specified by **map**
 
-During the code generation, all the field types specified in the entity file are replaced with the values specified in the map section of the generator.
+During the code generation, all the field types specified in the entity file are replaced with the values specified in the *map* section of the generator.
 For example, the type *int* for the generator **A** is mapped to *int* and  for the generator **B** to *int32*
 
 ## Entity File
